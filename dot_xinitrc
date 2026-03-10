@@ -1,0 +1,3 @@
+
+ibus-daemon -drx &
+exec dwm

@@ -1,0 +1,24 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias vim='nvim'
+alias vi='nvim'
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias lab='cd ~/Downloads/repos/LAB'
+PS1='[\u@\h \W]\$ '
+alias air='$(go env GOPATH)/bin/air'
+alias notes='cd ~/docs/notes'
+alias putmac='rsync -av --delete /home/soken/ shiny:/home/'
+alias journal='vim ~/docs/journals/'
+alias artbooks='cd ~/docs/books/Art/'
+alias books='cd ~/docs/books/'
+
+# Created by `pipx` on 2025-02-08 21:25:54
+export PATH="$PATH:/home/soken/.local/bin"
+
+ibus-daemon -drx

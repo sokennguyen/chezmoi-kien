@@ -2,19 +2,31 @@ set shell sh
 set shellopts '-eu'
 set ifs "\n"
 
-set preview true
+set preview false
 set dirpreviews true
 set drawbox true
 set cursorpreviewfmt "\033[7;2m"
 set scrolloff 10
-set previewer ~/.config/lf/preview.sh
 
 map <enter> open
 map gh cd ~
+map T thumbs
 
 cmd open &{{
     case $(file --mime-type -Lb -- "$f") in
-        image/*) for f in $fx; do feh "$f" > /dev/null 2>&1 & done;;
+        image/*) for f in $fx; do dir="$(dirname -- "$f")"; feh -. -Z --start-at "$f" "$dir" > /dev/null 2>&1 & done;;
         *) for f in $fx; do xdg-open "$f" > /dev/null 2>&1 & done;;
     esac
+}}
+
+cmd thumbs &{{
+    dir="$f"
+    [ -d "$dir" ] || dir="$(dirname -- "$f")"
+    for f in $fx; do :; done
+    first="${f:-}"
+    if [ -n "$first" ] && [ ! -d "$first" ]; then
+        feh -t -P --start-at "$first" "$dir" > /dev/null 2>&1 &
+    else
+        feh -t -P "$dir" > /dev/null 2>&1 &
+    fi
 }}

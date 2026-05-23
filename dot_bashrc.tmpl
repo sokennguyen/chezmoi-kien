@@ -13,12 +13,16 @@ alias lab='cd ~/Downloads/repos/LAB'
 PS1='[\u@\h \W]\$ '
 alias air='$(go env GOPATH)/bin/air'
 alias notes='cd ~/docs/notes'
-alias putmac='rsync -av --delete /home/soken/ shiny:/home/'
-alias journal='vim ~/docs/journals/'
+alias putmac='rsync -av --delete {{ .chezmoi.homeDir }}/ shiny:/home/'
+alias journal='ssh -t keen@mothership "bash -ic \"journal\""'
 alias artbooks='cd ~/docs/books/Art/'
 alias books='cd ~/docs/books/'
+alias zeko='ssh -t keen@mothership "source ~/.nvm/nvm.sh && nvm use 24 >/dev/null && ZEKO_REMOTE=arch ~/.openclaw/bin/zeko-tui"'
+alias mountsd='mount-sd-card'
 
 # Created by `pipx` on 2025-02-08 21:25:54
-export PATH="$PATH:/home/soken/.local/bin"
+export PATH="$PATH:{{ .chezmoi.homeDir }}/.local/bin"
 
+{{- if eq .chezmoi.os "linux" }}
 ibus-daemon -drx
+{{- end }}

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+event="${1:-}"
+label="${2:-}"
+mount_path="${3:-}"
+root="$HOME/mnt"
+mkdir -p "$root"
+
+sanitize() {
+  local s="$1"
+  s="$(printf '%s' "$s" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
+  [[ -n "$s" ]] || s="removable"
+  printf '%s\n' "$s"
+}
+
+name="$(sanitize "${label:-$(basename "${mount_path:-removable}")}")"
+label_link="$root/$name"
+current_link="$root/current-removable"
+
+cleanup_links_for_target() {
+  local target="$1"
+  find "$root" -maxdepth 1 -type l -print0 2>/dev/null | while IFS= read -r -d '' link; do
+    dest="$(readlink -f "$link" 2>/dev/null || true)"
+    [[ "$dest" == "$target" ]] && rm -f "$link"
+  done
+}
+
+case "$event" in
+  device_mounted)
+    [[ -n "$mount_path" ]] || exit 0
+    ln -sfn "$mount_path" "$label_link"
+    ln -sfn "$mount_path" "$current_link"
+    ;;
+  device_unmounted|device_removed)
+    [[ -n "$mount_path" ]] || exit 0
+    cleanup_links_for_target "$mount_path"
+    ;;
+  *)
+    ;;
+esac

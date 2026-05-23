@@ -68,7 +68,7 @@ static const char *lfcmd[]    = { TERMINAL, "-e", "lf", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_r,      spawn,          {.v = lfcmd } },
+	{ MODKEY,                       XK_e,      spawn,          {.v = lfcmd } },
 	{ MODKEY,		        XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,		        XK_w,	   spawn,          {.v = (const char*[]){ BROWSER, NULL } } },
 	{ MODKEY|ShiftMask,	        XK_w,	   spawn,          {.v = (const char*[]){ TERMINAL, "-e", "sudo", "nmtui", NULL } } },
@@ -85,7 +85,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_i,	   setlayout,      {0} },
+	{ MODKEY,                       XK_s,	   setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },

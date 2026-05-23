@@ -1,3 +1,4 @@
 
 ibus-daemon -drx &
+udiskie -a -N -T -F &
 exec dwm

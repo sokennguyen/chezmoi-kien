@@ -11,9 +11,9 @@ alt + i                 : komorebic toggle-shortcuts
 # The apps will be focused if open, or launched if not open
 # alt + f                 : if ($wshell.AppActivate('Firefox') -eq $False) { start firefox }
 # alt + b                 : if ($wshell.AppActivate('Chrome') -eq $False) { start chrome }
-alt + w                 : Start-Process "https://www.google.com"
+alt + w                 : Start-Process -FilePath "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe" -ArgumentList "--new-window"
 alt + return            : Start-Process wt
-alt + f                 : Start-Process -FilePath "C:\FL Studio\FL Studio Producer 25.2.4.5242 All Plugins Edition\App\Program Files\Image-Line\FL Studio 2025\FL64.exe"
+alt + f                 : Start-Process -FilePath "C:\FL Studio\FL Studio Producer 25.2.4.5242 All Plugins Edition\FL Studio.exe"
 
 alt + q                 : komorebic close
 # alt + m                 : komorebic minimize

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -f /etc/os-release ]; then . /etc/os-release; fi
+if [ "${ID:-}" != "arch" ]; then
+  echo "Skipping package install: not Arch (ID=${ID:-unknown})"
+  exit 0
+fi
+
+pkgs=(
+  base-devel
+  git
+  curl wget rsync
+  go
+  neovim ripgrep fd fzf unzip
+  xorg-server xorg-xinit
+  libx11 libxft libxinerama freetype2 harfbuzz
+  ibus
+  fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool
+)
+
+if ! command -v sudo >/dev/null; then
+  echo "sudo not found; cannot install packages"
+  exit 0
+fi
+
+sudo pacman -S --needed --noconfirm "${pkgs[@]}"

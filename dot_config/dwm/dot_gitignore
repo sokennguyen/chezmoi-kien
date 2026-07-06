@@ -1,0 +1,5 @@
+# local build outputs
+*.o
+dwm
+# local generated config copy
+config.h

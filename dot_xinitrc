@@ -1,0 +1,4 @@
+
+ibus-daemon -drx &
+udiskie -a -N -T -F --event-hook "$HOME/.local/bin/udiskie-event-hook {event} {id_label} {mount_path}" &
+exec dwm
